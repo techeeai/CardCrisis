@@ -40,13 +40,10 @@ public class GameManager : MonoBehaviour
         IsGameOver = true;
         Time.timeScale = 0f;
 
-        Debug.Log("GAME OVER (GameManager).");
     }
 
     public void RestartGame()
     {
-        Debug.Log("[GameManager] RestartGame called");
-        Debug.Log("[GameManager] Reloading scene: " + SceneManager.GetActiveScene().name);
         // TimeScale 0 kalmış olabilir, önce düzelt
         Time.timeScale = 1f;
 
@@ -58,6 +55,5 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         IsGameOver = false;
-        Debug.Log("TimeScale=" + Time.timeScale);
     }
 }

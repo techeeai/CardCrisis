@@ -28,7 +28,6 @@ public class RobotSpawner : MonoBehaviour
     {
         if (RobotPrefab == null)
         {
-            Debug.LogError("RobotSpawner: RobotPrefab boş!");
             return;
         }
 
