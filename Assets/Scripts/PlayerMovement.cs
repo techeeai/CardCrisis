@@ -27,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameManager.Instance != null && !GameManager.Instance.IsGameplayActive)
+            return;
+
         float move = Input.GetAxis("Horizontal");
         Vector2 pos = rb.position;
         pos.x += move * speed * Time.fixedDeltaTime;

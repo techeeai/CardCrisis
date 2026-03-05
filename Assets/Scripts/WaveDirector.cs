@@ -52,6 +52,7 @@ public class WaveDirector : MonoBehaviour
     private void Update()
     {
         if (DifficultyManager.Instance == null) return;
+        if (GameManager.Instance != null && !GameManager.Instance.IsGameplayActive) return;
 
         switch (state)
         {
@@ -126,6 +127,7 @@ public class WaveDirector : MonoBehaviour
         if (stats != null)
         {
             stats.SetMaxHp(hp);
+            stats.SetIsBoss(false);
             stats.OnDied += HandleNormalDied;
         }
 
@@ -178,6 +180,7 @@ public class WaveDirector : MonoBehaviour
         if (stats != null)
         {
             stats.SetMaxHp(bossHp);
+            stats.SetIsBoss(true);
             stats.OnDied += HandleBossDied;
         }
 
@@ -191,5 +194,6 @@ public class WaveDirector : MonoBehaviour
     private void HandleBossDied(EnemyStats enemy)
     {
         bossAlive = false;
+        GameEvents.RaiseWaveCompleted(wave);
     }
 }
