@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public bool IsGameOver { get; private set; }
+    public bool IsGameplayActive { get; private set; }
 
     private void Awake()
     {
@@ -38,22 +39,34 @@ public class GameManager : MonoBehaviour
         if (IsGameOver) return;
 
         IsGameOver = true;
+        IsGameplayActive = false;
         Time.timeScale = 0f;
-
     }
 
     public void RestartGame()
     {
-        // TimeScale 0 kalmış olabilir, önce düzelt
         Time.timeScale = 1f;
-
-        // Aynı sahneyi yeniden yükle
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void EnterMainMenu()
+    {
+        IsGameplayActive = false;
+        IsGameOver = false;
+        Time.timeScale = 0f;
+    }
+
+    public void StartGameplayFromMenu()
+    {
+        IsGameplayActive = true;
+        IsGameOver = false;
+        Time.timeScale = 1f;
     }
 
     private void ResetGameState()
     {
         Time.timeScale = 1f;
         IsGameOver = false;
+        IsGameplayActive = true;
     }
 }
