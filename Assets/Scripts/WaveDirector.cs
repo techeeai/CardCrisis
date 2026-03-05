@@ -52,6 +52,7 @@ public class WaveDirector : MonoBehaviour
     private void Update()
     {
         if (DifficultyManager.Instance == null) return;
+        if (GameManager.Instance != null && !GameManager.Instance.IsGameplayActive) return;
 
         switch (state)
         {
