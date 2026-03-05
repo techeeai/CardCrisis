@@ -11,9 +11,8 @@ public class KillZone : MonoBehaviour
     [SerializeField] private int damage = 1;
 
     [Header("References")]
-    [SerializeField] private PlayerHealth playerHealth; // Inspector’dan bağla
+    [SerializeField] private PlayerHealth playerHealth;
 
-    // Aynı Robot birden fazla tetiklenirse iki kez hasar vermesin
     private readonly HashSet<int> processedInstanceIds = new HashSet<int>();
 
     private void Reset()
@@ -26,9 +25,6 @@ public class KillZone : MonoBehaviour
     {
         if (playerHealth == null)
             playerHealth = FindObjectOfType<PlayerHealth>();
-
-        if (playerHealth == null)
-            Debug.LogWarning("KillZone: PlayerHealth bulunamadı. Üst duvar robotu yok edecek ama can düşürmeyecek.");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,12 +35,9 @@ public class KillZone : MonoBehaviour
         if (processedInstanceIds.Contains(id)) return;
         processedInstanceIds.Add(id);
 
-        // Robot kaçtı => can düş
         if (playerHealth != null)
             playerHealth.TakeDamage(damage);
 
-        // ✅ DEĞİŞİKLİK BURADA:
-        // WaveDirector sayacı doğru azalsın diye (OnDied tetiklensin)
         var stats = other.GetComponent<EnemyStats>();
         if (stats != null)
             stats.Die();

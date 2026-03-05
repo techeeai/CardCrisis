@@ -36,7 +36,6 @@ public class PlayerHealth : MonoBehaviour
         health -= amount;
         health = Mathf.Clamp(health, 0, maxHealth);
 
-        Debug.Log("[PlayerHealth] RaiseHealthChanged -> " + health);
         GameEvents.RaiseHealthChanged(health);
 
         if (health <= 0)

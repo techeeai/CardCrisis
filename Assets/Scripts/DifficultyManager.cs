@@ -19,17 +19,14 @@ public class DifficultyManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log($"[DM] Awake on {name} | spawnInc%={spawnIncreasePercent}");
 
         if (Instance != null && Instance != this)
         {
-            Debug.Log($"[DM] DUPLICATE DESTROY: {name}");
             Destroy(gameObject);
             return;
         }
 
         Instance = this;
-        Debug.Log($"[DM] Instance SET => {name} | spawnInc%={spawnIncreasePercent}");
     }
 
     public int GetNormalCount(int wave)

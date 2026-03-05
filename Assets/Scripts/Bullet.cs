@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
@@ -21,11 +21,9 @@ public class Bullet : MonoBehaviour
         if (!other.CompareTag("Robot")) return;
         
         var stats = other.GetComponent<EnemyStats>();
-        Debug.Log("Has EnemyStats? " + (stats != null));
         if (stats != null)
             stats.TakeDamage(damage);
         Destroy(gameObject);
         
-        Debug.Log("Bullet hit: " + other.name + " tag=" + other.tag);
     }
 }
